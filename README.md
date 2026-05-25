@@ -1,80 +1,135 @@
-# Dockcel — Docker Management Panel
+<p align="center">
+  <img src="https://img.shields.io/badge/dockcel-v1.0.0-50e3c2?style=flat-square&labelColor=111" alt="dockcel">
+</p>
 
-> A dark-themed, Vercel-inspired web panel for managing Docker containers, images, and system resources.
+<p align="center">
+  <img src="https://img.shields.io/badge/react-18.3-61dafb?style=flat-square&logo=react&labelColor=111" alt="React">
+  <img src="https://img.shields.io/badge/vite-6.0-646cff?style=flat-square&logo=vite&labelColor=111" alt="Vite">
+  <img src="https://img.shields.io/badge/express-4.21-000?style=flat-square&logo=express&labelColor=111" alt="Express">
+  <img src="https://img.shields.io/badge/docker-2496ed?style=flat-square&logo=docker&labelColor=111" alt="Docker">
+  <img src="https://img.shields.io/badge/tailwind-3.4-06b6d4?style=flat-square&logo=tailwindcss&labelColor=111" alt="Tailwind CSS">
+</p>
 
-![screenshot](https://img.shields.io/badge/status-active-success?style=flat-square)
-![license](https://img.shields.io/badge/license-MIT-blue?style=flat-square)
+<div align="center">
+<pre style="background: #0a0a0a; color: #50e3c2; padding: 1rem 1.5rem; border-radius: 8px; border: 1px solid #1a1a1a; display: inline-block; text-align: left; font-family: 'JetBrains Mono', monospace;">
+┌───────────────────────────────────┐
+│ ○ ○ ○                            │
+│                                   │
+│  $ docker compose up -d           │
+│  [+] Running 1/1                  │
+│  ✔ Container dockcel  Started     │
+│  → http://localhost:3001          │
+│                                   │
+└───────────────────────────────────┘
+</pre>
+</div>
+
+<p align="center">
+  A dark-themed, Vercel-inspired web panel for managing Docker containers,<br>
+  images, and system resources — served from a single container.
+</p>
+
+<br>
 
 ---
 
-## Features
+<br>
 
-- **Dashboard** — Real-time overview of containers, images, CPU, memory, and Docker host info
-- **Container Management** — Start, stop, restart, pause, and remove containers with one click
-- **Container Details** — Inspect configuration, view live logs, monitor CPU/memory/network/disk stats
-- **Image Browser** — List and remove Docker images
-- **Dark Theme** — Full dark UI inspired by Vercel's design language
-- **Dockerized** — Runs as a single container with Docker socket access
+## ✦ At a Glance
 
-## Quick Start
+<table>
+<tr>
+<td width="50%">
+
+**Dashboard** — Real-time overview of your Docker host. Containers, images, CPU, memory, and system info at a glance.
+
+</td>
+<td width="50%">
+
+**Containers** — Full lifecycle management. Start, stop, restart, pause, or remove containers. Filter by status, search by name.
+
+</td>
+</tr>
+<tr>
+<td width="50%">
+
+**Container Details** — Inspect configs, follow live logs, monitor CPU/memory/network/disk stats in real time.
+
+</td>
+<td width="50%">
+
+**Images** — Browse all images on the host, inspect details, remove dangling or unused images.
+
+</td>
+</tr>
+</table>
+
+<br>
+
+## ✦ Quick Start
 
 ```bash
-# Clone the repo
 git clone https://github.com/agnogad/dockcel.git
 cd dockcel
-
-# Start the panel
 docker compose up -d
 ```
 
-Open **http://localhost:3001** in your browser.
+Open **[http://localhost:3001](http://localhost:3001)**.
 
-## Manual Start (without Docker)
+<br>
+
+## ✦ Run Without Docker
 
 ```bash
-# Server
+# Terminal 1 — Server
 cd server && npm install && npm run dev
 
-# Client (separate terminal)
+# Terminal 2 — Client (dev mode with HMR)
 cd client && npm install && npm run dev
 ```
 
-The client runs on port 5173 and proxies API requests to the server on port 3001.
+The client runs on port 5173 and proxies API calls to the server on port 3001.
 
-## Environment Variables
+<br>
+
+## ✦ Environment
 
 | Variable | Default | Description |
 |---|---|---|
 | `PORT` | `3001` | Server port |
-| `DOCKER_SOCKET` | `/var/run/docker.sock` | Docker socket path |
+| `DOCKER_SOCKET` | `/var/run/docker.sock` | Docker daemon socket path |
 
-## Tech Stack
+<br>
 
-- **Frontend:** React 18, Vite, Tailwind CSS
-- **Backend:** Node.js, Express, dockerode
-- **Design:** Vercel-inspired design system (Geist/Inter type, mesh gradients, stacked shadows)
+## ✦ Tech Stack
 
-## API Endpoints
+```
+Frontend   React 18 · Vite 6 · Tailwind CSS 3.4
+Backend    Node.js 22 · Express 4.21 · dockerode 4.0
+Design     Vercel-inspired (Geist/Inter type, mesh gradients, stacked shadows)
+Deploy     Single Docker container · restart: unless-stopped
+```
 
-| Method | Path | Description |
+<br>
+
+## ✦ API
+
+| Method | Endpoint | Description |
 |---|---|---|
 | `GET` | `/api/health` | Health check |
-| `GET` | `/api/system/info` | Docker system info |
+| `GET` | `/api/system/info` | Docker system information |
 | `GET` | `/api/system/df` | Docker disk usage |
 | `GET` | `/api/system/ping` | Docker ping |
-| `GET` | `/api/containers?all=true` | List containers |
-| `POST` | `/api/containers/:id/start` | Start container |
-| `POST` | `/api/containers/:id/stop` | Stop container |
-| `POST` | `/api/containers/:id/restart` | Restart container |
-| `POST` | `/api/containers/:id/pause` | Pause container |
-| `POST` | `/api/containers/:id/unpause` | Unpause container |
-| `POST` | `/api/containers/:id/remove` | Remove container |
+| `GET` | `/api/containers` | List containers (`?all=true`) |
+| `POST` | `/api/containers/:id/:action` | `start` · `stop` · `restart` · `pause` · `unpause` · `remove` |
 | `GET` | `/api/containers/:id/inspect` | Inspect container |
-| `GET` | `/api/containers/:id/logs` | Container logs |
-| `GET` | `/api/containers/:id/stats` | Container stats |
+| `GET` | `/api/containers/:id/logs` | Container logs (`?tail=200`) |
+| `GET` | `/api/containers/:id/stats` | Container stats snapshot |
 | `GET` | `/api/images` | List images |
 | `DELETE` | `/api/images/:id` | Remove image |
 
-## License
+<br>
 
-MIT
+## ✦ License
+
+MIT — use it, fork it, ship it.
