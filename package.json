@@ -1,0 +1,11 @@
+{
+  "name": "dockcel",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "server": "cd server && npm run dev",
+    "client": "cd client && npm run dev",
+    "dev": "npm run server & npm run client & wait",
+    "build": "cd client && npm run build"
+  }
+}

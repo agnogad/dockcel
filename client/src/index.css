@@ -1,0 +1,131 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: #333333;
+    color: #ededed;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #333333;
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555555;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-canvas rounded-md p-lg shadow-level-1;
+  }
+
+  .card-soft {
+    @apply bg-canvas-soft rounded-md p-lg;
+  }
+
+  .btn-primary {
+    @apply bg-on-primary text-canvas rounded-pill px-sm text-button-lg font-medium
+           hover:opacity-80 transition-all duration-150 h-12 inline-flex items-center justify-center;
+  }
+
+  .btn-secondary {
+    @apply bg-canvas text-ink rounded-pill px-sm text-button-lg font-medium
+           hover:bg-canvas-soft-2 transition-all duration-150 h-12 inline-flex items-center justify-center
+           border-0 shadow-level-1;
+  }
+
+  .btn-primary-sm {
+    @apply bg-on-primary text-canvas rounded-pill px-xs text-button-md font-medium
+           hover:opacity-80 transition-all duration-150 h-8 inline-flex items-center justify-center;
+  }
+
+  .btn-secondary-sm {
+    @apply bg-canvas text-ink rounded-pill px-xs text-button-md font-medium
+           hover:bg-canvas-soft-2 transition-all duration-150 h-8 inline-flex items-center justify-center
+           shadow-level-1;
+  }
+
+  .btn-ghost {
+    @apply bg-canvas text-ink rounded-pill-sm px-md text-body-sm font-normal
+           hover:bg-canvas-soft-2 transition-all duration-150 h-9 inline-flex items-center justify-center;
+  }
+
+  .btn-icon {
+    @apply bg-canvas text-body rounded-full border border-hairline
+           hover:bg-canvas-soft-2 hover:text-ink transition-all duration-150
+           w-8 h-8 inline-flex items-center justify-center;
+  }
+
+  .badge {
+    @apply bg-canvas-soft-2 text-body rounded-full px-xs text-caption inline-flex items-center;
+  }
+
+  .badge-success {
+    @apply bg-green-900/40 text-green-400 rounded-full px-xs text-caption inline-flex items-center;
+  }
+
+  .badge-error {
+    @apply bg-error-soft text-error rounded-full px-xs text-caption inline-flex items-center;
+  }
+
+  .badge-warning {
+    @apply bg-warning-soft text-warning rounded-full px-xs text-caption inline-flex items-center;
+  }
+
+  .input {
+    @apply bg-canvas text-ink border border-hairline rounded-sm px-sm text-body-sm
+           focus:outline-none focus:border-mute focus:ring-0 transition-colors duration-150
+           h-10;
+  }
+
+  .input-sm {
+    @apply bg-canvas text-ink border border-hairline rounded-sm px-sm text-body-sm
+           focus:outline-none focus:border-mute focus:ring-0 transition-colors duration-150
+           h-8;
+  }
+
+  .nav-link {
+    @apply text-body text-body-sm rounded-full px-xs py-0.5
+           hover:bg-canvas-soft-2 hover:text-ink transition-all duration-150;
+  }
+
+  .nav-link-active {
+    @apply text-ink bg-canvas-soft-2 text-body-sm rounded-full px-xs py-0.5;
+  }
+
+  .tab-pill {
+    @apply bg-canvas text-body text-body-sm rounded-pill-sm px-md h-9
+           hover:text-ink hover:bg-canvas-soft-2 transition-all duration-150
+           inline-flex items-center justify-center
+           data-[active=true]:bg-canvas-soft-2 data-[active=true]:text-ink;
+  }
+
+  .mesh-gradient {
+    background: linear-gradient(135deg, #007cf0 0%, #00dfd8 33%, #7928ca 66%, #ff0080 100%);
+    background-size: 200% 200%;
+    animation: mesh-shift 8s ease-in-out infinite alternate;
+  }
+
+  @keyframes mesh-shift {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 100% 100%; }
+  }
+}
